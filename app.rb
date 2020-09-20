@@ -33,5 +33,11 @@ end
 
 post '/new' do
 	@content=params[:content]
-	erb "You taped #{@content}"
+
+	if @content.length < 1
+		@error='Type post text'
+		erb :new
+	else
+		erb "You taped #{@content}"
+	end
 end
