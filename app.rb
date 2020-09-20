@@ -38,6 +38,8 @@ post '/new' do
 		@error='Type post text'
 		erb :new
 	else
+		@db.execute 'INSERT INTO Posts (content,created_date) VALUES (?, datetime())', [@content]
+
 		erb "You taped #{@content}"
 	end
 end
