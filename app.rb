@@ -42,6 +42,6 @@ post '/new' do
 	else
 		@db.execute 'INSERT INTO Posts (content,created_date) VALUES (?, datetime())', [@content]
 
-		erb "You taped #{@content}"
+		redirect to '/'
 	end
 end
