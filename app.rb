@@ -54,3 +54,10 @@ get '/details/:post_id' do
 
 	erb :details
 end
+
+post '/details/:post_id' do
+	post_id=params[:post_id]	# Получить значение из URL'а
+	content=params[:content]
+
+	erb "You taped #{content} for post #{post_id}"
+end
