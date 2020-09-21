@@ -47,7 +47,7 @@ post '/new' do
 end
 
 get '/details/:post_id' do
-	post_id=params[:post_id]
+	post_id=params[:post_id]	# Получить значение из URL'а
 
 	data_db=@db.execute 'SELECT * FROM Posts WHERE id=?', [post_id]
 	@row=data_db[0]
