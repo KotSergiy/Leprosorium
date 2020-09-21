@@ -24,6 +24,8 @@ before do
 end
 
 get '/' do
+	@data_db=@db.execute 'SELECT * FROM Posts ORDER BY id DESC'
+
 	erb :index
 end
 
