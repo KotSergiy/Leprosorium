@@ -69,7 +69,11 @@ post '/details/:post_id' do
 	post_id=params[:post_id]	# Получить значение из URL'а
 	content=params[:content]
 
-	@db.execute 'INSERT INTO Comments (content,created_date,post_id) VALUES (?, datetime(),?)', [content,post_id]
+	if content.length < 1
+		@error='Type comment text'
+	else
+		@db.execute 'INSERT INTO Comments (content,created_date,post_id) VALUES (?, datetime(),?)', [content,post_id]
+	end
 
 	redirect to '/details/' + post_id
 end
