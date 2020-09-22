@@ -60,6 +60,8 @@ get '/details/:post_id' do
 	data_db=@db.execute 'SELECT * FROM Posts WHERE id=?', [post_id]
 	@row=data_db[0]
 
+	@comments=@db.execute 'SELECT * FROM Comments WHERE post_id=?', [post_id]
+
 	erb :details
 end
 
@@ -69,5 +71,5 @@ post '/details/:post_id' do
 
 	@db.execute 'INSERT INTO Comments (content,created_date,post_id) VALUES (?, datetime(),?)', [content,post_id]
 
-	erb "You taped #{content} for post #{post_id}"
+	redirect to '/details/' + post_id
 end
