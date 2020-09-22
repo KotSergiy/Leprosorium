@@ -17,6 +17,14 @@ configure do
 			created_date DATE,
 			content TEXT
 		)'
+
+	@db.execute 'CREATE TABLE IF NOT EXISTS Comments
+		(
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			created_date DATE,
+			content TEXT,
+			post_id INTEGER
+		)'
 end
 
 before do
@@ -58,6 +66,8 @@ end
 post '/details/:post_id' do
 	post_id=params[:post_id]	# Получить значение из URL'а
 	content=params[:content]
+
+	@db.execute 'INSERT INTO Comments (content,created_date,post_id) VALUES (?, datetime(),?)', [content,post_id]
 
 	erb "You taped #{content} for post #{post_id}"
 end
