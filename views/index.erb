@@ -2,6 +2,9 @@
 <br />
 <% @data_db.each do |post| %>
   <p>
+    Author: <%= post['author'] %>
+    <br>
+    <br>
     <%= post['content'] %>
     <br />
     <br />
