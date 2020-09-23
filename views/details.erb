@@ -1,15 +1,15 @@
 <h4>Post details:</h4>
 <br>
 <p>
-  <%= @row['content'] %>
+  <%= $row['content'] %>
   <br />
   <br />
-  Added at <%= @row['created_date'] %>
+  Added at <%= $row['created_date'] %>
 </p>
 <br>
 <h4>Comments:</h4>
 <br>
-<% @comments.each do |comment| %>
+<% $comments.each do |comment| %>
   <p>
     <%= comment['content'] %>
     <br>
@@ -18,7 +18,7 @@
   </p>
 <% end %>
 <p>
-  <form action="/details/<%= @row['id'] %>" method="post" role="form">
+  <form action="/details/<%= $row['id'] %>" method="post" role="form">
     <textarea name="content" class="form-control" rows="3" placeholder="Type comment text here"></textarea>
     <br>
     <button type="submit" class="btn btn-primary">Add comment</button>

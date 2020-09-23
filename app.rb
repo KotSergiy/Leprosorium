@@ -58,9 +58,9 @@ get '/details/:post_id' do
 	post_id=params[:post_id]	# Получить значение из URL'а
 
 	data_db=@db.execute 'SELECT * FROM Posts WHERE id=?', [post_id]
-	@row=data_db[0]
+	$row=data_db[0]
 
-	@comments=@db.execute 'SELECT * FROM Comments WHERE post_id=?', [post_id]
+	$comments=@db.execute 'SELECT * FROM Comments WHERE post_id=?', [post_id]
 
 	erb :details
 end
@@ -71,9 +71,9 @@ post '/details/:post_id' do
 
 	if content.length < 1
 		@error='Type comment text'
+		erb :details
 	else
 		@db.execute 'INSERT INTO Comments (content,created_date,post_id) VALUES (?, datetime(),?)', [content,post_id]
+		redirect to '/details/' + post_id
 	end
-
-	redirect to '/details/' + post_id
 end
