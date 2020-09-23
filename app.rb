@@ -42,13 +42,19 @@ get '/new' do
 end
 
 post '/new' do
-	@content=params[:content]
+	content=params[:content]
+	author=params[:author]
 
-	if @content.length < 1
-		@error='Type post text'
+	hh={
+		:author=>"Type author's name",
+		:content=>"Type post text"
+	}
+	@error=hh.select{ |key,| params[key]==""}.values.join(", ")
+
+	if @error!=""
 		erb :new
 	else
-		@db.execute 'INSERT INTO Posts (content,created_date) VALUES (?, datetime())', [@content]
+		@db.execute 'INSERT INTO Posts (content,created_date) VALUES (?, datetime())', [content]
 
 		redirect to '/'
 	end
